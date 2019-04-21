@@ -12,9 +12,11 @@ public class Main {
             String archivo;
             String option = "-d"; //Por defecto se revisa un documento
             
-            if (args.length >= 2) { //Sino hay argumentos o los suficientes, analiza el docuemnto de prueba.
+            if (args.length == 2) { //Sino hay argumentos o los suficientes, analiza el docuemnto de prueba.
                 archivo = args[0];
                 option = args[1];
+            } else if (args.length == 1) {
+                archivo = args[0];
             } else {
                 archivo = "prueba.txt";
             }

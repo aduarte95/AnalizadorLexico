@@ -1,0 +1,12 @@
+1777*
+#*1
+*#06#
+a123
+12345
+este es un
+ejemplo
+de
+analisis
+lexico
+con
+JFlex

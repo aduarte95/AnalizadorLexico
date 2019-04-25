@@ -11,6 +11,8 @@ public class Main {
             TokenPersonalizado token;
             String archivo;
             String option = "-d"; //Por defecto se revisa un documento
+            int cont = 0;
+            int terminos = 0;
             
             if (args.length == 2) { //Sino hay argumentos o los suficientes, analiza el docuemnto de prueba.
                 archivo = args[0];
@@ -31,7 +33,7 @@ public class Main {
                 while(true){
                     // Obtener el token analizado y mostrar su información
                     token = analizadorJFlex.yylex();
-                    
+                    cont++;
                     if(!analizadorJFlex.existenTokens())
                         break;
 
@@ -40,6 +42,7 @@ public class Main {
                     if((token.getToken()).equals("Termino")) { //Si es un término lo escribe en el archivo.
                         writer.write(token.getLexema());
                         writer.newLine();
+                        terminos++;
                     }
                 }
                 writer.close(); 
@@ -50,19 +53,26 @@ public class Main {
                 while(true){
                     // Obtener el token analizado y mostrar su información
                     token = analizadorJFlex.yylex();
-                    
+                   
                     if(!analizadorJFlex.existenTokens())
                         break;
-
+                    
+                    cont++;
                     System.out.println(token.toString()); //Imprime lo que analiza
                     
                     if((token.getToken()).equals("Termino")) { //Si es un término lo escribe en el archivo.
                         writer.write(token.getLexema());
                         writer.newLine();
+                        terminos++;
                     }
                 }
                 writer.close(); 
             }
+            
+            System.out.println();
+            System.out.println("Total de tokens: " + cont);
+            System.out.println("Terminos escritos: " + terminos);
+            
         } 
         catch (Exception e) {
             System.out.println(e.toString());

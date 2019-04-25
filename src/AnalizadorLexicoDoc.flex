@@ -34,9 +34,13 @@
  Etiqueta = <[^>]+>|<\/[a-zA-Z]*>
  Digito = [0-9]
  Numero = {Digito} {Digito}*
- Letra = [A-Za-z]
+ Articulo =  el | la | los | las | un | unos | una | unas | lo
+ Contraccion = del | al
+ Pronombre = ella | el | nosotros | nosotras | usted | ustedes
+ Conjuncion = y | e | ni | mas | pero | aunque | sin embargo | sino | no obstante | empero | ya | sea | o | u | esto es | es decir | o sea | si | a condición de que | con tal de que | como | porque | pues | puesto que | dado que | pues que | ya que | tan | tal | luego | conque | así pues | aunque | a pesar de que | aun cuando | si bien | para que | a que | a fin de que | con objeto de | con la intención de que  
+ Preposicion =  a | ante | bajo | con | de | desde | durante | en | entre | excepto | hacia | hasta | mediante | para | por | salvo | según | sin | sobre | tras
+ Letra = \p{L}
  Termino = {Letra} {Letra}*
- Simbolo = "*"|"+"|"-"|"/"|"#"
  Espacio = " "
  SaltoDeLinea = \n|\r|\r\n
  
@@ -61,27 +65,48 @@
  this._existenTokens = true;
  return t;
 }
+
+{Articulo} {
+ TokenPersonalizado t = new TokenPersonalizado(yytext(), "Articulo");
+ this._existenTokens = true;
+ return t;
+}
+
+{Contraccion} {
+ TokenPersonalizado t = new TokenPersonalizado(yytext(), "Contraccion");
+ this._existenTokens = true;
+ return t;
+}
+
+{Pronombre} {
+ TokenPersonalizado t = new TokenPersonalizado(yytext(), "Pronombre");
+ this._existenTokens = true;
+ return t;
+}
+
+{Conjuncion} {
+ TokenPersonalizado t = new TokenPersonalizado(yytext(), "Conjuncion");
+ this._existenTokens = true;
+ return t;
+}
+
+{Preposicion} {
+ TokenPersonalizado t = new TokenPersonalizado(yytext(), "Preposicion");
+ this._existenTokens = true;
+ return t;
+}
  
 {Termino} {
  TokenPersonalizado t = new TokenPersonalizado(yytext(), "Termino");
  this._existenTokens = true;
  return t;
 }
- 
-{Simbolo} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "SIMBOLO");
- this._existenTokens = true;
- return t;
-}
- 
+
 {Espacio} {
  // Ignorar cuando se ingrese un espacio
 }
  
 {SaltoDeLinea} {
- TokenPersonalizado t = new TokenPersonalizado("Enter", "NUEVA_LINEA");
- this._existenTokens = true;
- return t;
 }
 
 [^] {TokenPersonalizado t = new TokenPersonalizado(yytext(), "Sin utilidad");

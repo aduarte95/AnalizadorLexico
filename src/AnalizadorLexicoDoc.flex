@@ -15,6 +15,8 @@
  
 %}
  
+%ignorecase
+
  /* Al utilizar esta instrucción, se le indica a JFlex que devuelva objetos del tipo TokenPersonalizado */
 %type TokenPersonalizado
  
@@ -30,7 +32,7 @@
 %eof}
  
 /* Inicio de Expresiones regulares */
- 
+
  Etiqueta = <[^>]+>|<\/[a-zA-Z]*>
  Digito = [0-9]
  Numero = {Digito} {Digito}*
@@ -40,10 +42,10 @@
  Conjuncion = y | e | ni | mas | pero | aunque | sin embargo | sino | no obstante | empero | ya | sea | o | u | esto es | es decir | o sea | si | a condición de que | con tal de que | como | porque | pues | puesto que | dado que | pues que | ya que | tan | tal | luego | conque | así pues | aunque | a pesar de que | aun cuando | si bien | para que | a que | a fin de que | con objeto de | con la intención de que  
  Preposicion =  a | ante | bajo | con | de | desde | durante | en | entre | excepto | hacia | hasta | mediante | para | por | salvo | según | sin | sobre | tras
  Letra = \p{L}
+ TerminoConGuion = {Letra}*"_"{Letra}* | {Letra}*"-"{Letra}*
  Termino = {Letra} {Letra}*
  Espacio = " "
  SaltoDeLinea = \n|\r|\r\n
- 
  
 /* Finaliza expresiones regulares */
  
@@ -67,37 +69,43 @@
 }
 
 {Articulo} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "Articulo");
+ TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Articulo");
  this._existenTokens = true;
  return t;
 }
 
 {Contraccion} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "Contraccion");
+ TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Contraccion");
  this._existenTokens = true;
  return t;
 }
 
 {Pronombre} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "Pronombre");
+ TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Pronombre");
  this._existenTokens = true;
  return t;
 }
 
 {Conjuncion} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "Conjuncion");
+ TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Conjuncion");
  this._existenTokens = true;
  return t;
 }
 
 {Preposicion} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "Preposicion");
+ TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Preposicion");
  this._existenTokens = true;
  return t;
 }
  
+{TerminoConGuion} {
+ TokenPersonalizado t = new TokenPersonalizado(yytext().replace("-","").replace("_","").toLowerCase(), "Termino");
+ this._existenTokens = true;
+ return t;
+}
+
 {Termino} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "Termino");
+ TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Termino");
  this._existenTokens = true;
  return t;
 }

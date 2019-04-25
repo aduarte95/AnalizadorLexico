@@ -6,10 +6,10 @@
 
 [Instalar jflex](https://jonathanbucaro.com/2015/04/11/instalacion-jflex/)
 
-## 1. Compilar archivos .jflex
+## 1. Compilar archivos .flex
 
 ```
-jflex [Archivo.jflex]
+jflex [Archivo.flex]
 ```
 
 ## 2. Compilar main

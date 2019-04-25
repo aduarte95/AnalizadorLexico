@@ -22,10 +22,11 @@ public class Main {
             } else {
                 archivo = "prueba.txt";
             }
-           
+			
             // Se trata de leer el archivo y analizarlo en la clase que se ha creado con JFlex
             BufferedReader buffer = new BufferedReader(new FileReader(archivo));
             
+
             if(!option.equals("-c")) { //Sino hay parámetro -c se analiza como un doc
                 AnalizadorLexicoDoc analizadorJFlex = new AnalizadorLexicoDoc(buffer);
                 writer = new BufferedWriter(new FileWriter("clean_text_doc.txt"));; //Escribe en archivo limpio

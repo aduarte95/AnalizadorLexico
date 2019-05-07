@@ -1,18 +1,16 @@
-import java.io.BufferedWriter;
-
 public class Main {
     public static void main(String[] args) {
         String directory;
-        FileControl fileControl;
+        Analizador analizador;
 
         if (args.length == 1) {
             directory = args[0];
         } else {
-            directory = "documents2";
+            directory = "C:/Users/alexa/OneDrive/Recuperación de Información/Investigacion/AnalizadorLexico/src/documents2";
         }
 
-        fileControl = new FileControl(directory);
+        analizador = new Analizador(directory);
 
-        fileControl.listeArchivos();
+        analizador.listeArchivos();
     }
 }

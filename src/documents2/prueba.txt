@@ -1,18 +1,18 @@
 <HTML>
 <HEAD>
-<TITLE>Recuperación de Información</TITLE>
+<TITLE>Recuperacion recuperacion recuperacion de InformaciÃ³n</TITLE>
 </HEAD>
 <BODY BGCOLOR="FFFFFF">
 <CENTER><IMG SRC="imagen.jpg" ALIGN="BOTTOM"> </CENTER>
 <HR>
-<a href="http://www.kramirez.net/ci-2414/t">Aquí puedes aprender sobre recuperación de información </a>
-es un vínculo a otro buen sitio web
-<H1>Recuperación de Información</H1>
-<H2>¿Qué es?</H2>
-Un ejemplo de una palabra con guión es: "dia-mes-año".
-<P> El proceso de recuperación se lleva a cabo mediante consultas a la base de datos donde se almacena la información estructurada, mediante un lenguaje de interrogación adecuado. Es necesario tener en cuenta los elementos clave que permiten hacer la búsqueda, determinando un mayor grado de pertinencia y precisión, como son: los índices, palabras clave, tesauros y los fenómenos que se pueden dar en el proceso como son el ruido y silencio documental. Uno de los problemas que surgen en la búsqueda de información es si lo que recuperamos es “mucho o poco” es decir, dependiendo del tipo de búsqueda se pueden recuperar multitud de documentos o simplemente un número muy reducido. A este fenómeno se denomina Silencio o Ruido documental.
-<P> <B><I>Silencio documental:</I> Son aquellos documentos almacenados en la base de datos pero que no han sido recuperados, debido a que la estrategia de búsqueda ha sido demasiado específica o que las palabras clave utilizadas no son las adecuadas para definir la búsqueda.</B>
-<BR> <B><I>Ruido documental: </I>Son aquellos documentos recuperados por el sistema pero que no son relevantes. Esto suele ocurrir cuando la estrategia de búsqueda se ha definido demasiado genérica.</B>
+<a href="http://www.kramirez.net/ci-2414/t">AquÃ­ puedes aprender sobre recuperaciÃ³n de informaciÃ³n </a>
+es un vÃ­nculo a otro buen sitio web
+<H1>RecuperaciÃ³n de InformaciÃ³n</H1>
+<H2>Â¿QuÃ© es?</H2>
+Un ejemplo de una palabra con guiÃ³n es: "dia-mes-aÃ±o".
+<P> El proceso de recuperaciÃ³n se lleva a cabo mediante consultas a la base de datos donde se almacena la informaciÃ³n estructurada, mediante un lenguaje de interrogaciÃ³n adecuado. Es necesario tener en cuenta los elementos clave que permiten hacer la bÃºsqueda, determinando un mayor grado de pertinencia y precisiÃ³n, como son: los Ã­ndices, palabras clave, tesauros y los fenÃ³menos que se pueden dar en el proceso como son el ruido y silencio documental. Uno de los problemas que surgen en la bÃºsqueda de informaciÃ³n es si lo que recuperamos es â€œmucho o pocoâ€ es decir, dependiendo del tipo de bÃºsqueda se pueden recuperar multitud de documentos o simplemente un nÃºmero muy reducido. A este fenÃ³meno se denomina Silencio o Ruido documental.
+<P> <B><I>Silencio documental:</I> Son aquellos documentos almacenados en la base de datos pero que no han sido recuperados, debido a que la estrategia de bÃºsqueda ha sido demasiado especÃ­fica o que las palabras clave utilizadas no son las adecuadas para definir la bÃºsqueda.</B>
+<BR> <B><I>Ruido documental: </I>Son aquellos documentos recuperados por el sistema pero que no son relevantes. Esto suele ocurrir cuando la estrategia de bÃºsqueda se ha definido demasiado genÃ©rica.</B>
 <HR>
 </BODY>
 </HTML>

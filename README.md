@@ -4,10 +4,8 @@
 
 ## TODO
 
-* [ ] Pasar todo el documento a minúsculas antes de analizarlo.
-* [ ] Quitar el lowercase del flex.
-* [ ] Aceptar múltiples archivos.
-* [ ] Salida de un archivo por cada archivo analizado.
+* [X] Aceptar múltiples archivos.
+* [X] Salida de un archivo por cada archivo analizado.
 * [ ] Salida de un solo archivo con todos los términos de los archivos anteriores.
 
   ### Reglas 

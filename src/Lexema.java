@@ -19,7 +19,20 @@ public class Lexema {
         return frecuencia;
     }
 
-    public int getTf(){
-        return 0;
+    public double getTf(double max){
+        return frecuencia/max;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean equal = this.termino.equals(((Lexema) obj).termino);
+
+        if (equal) {
+            ((Lexema) obj).sumeFreq();
+        }
+
+        return equal;
+    }
+
+
 }

@@ -2,6 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -12,6 +13,7 @@ public class Analizador {
     private TokenPersonalizado token;
     private AnalizadorLexicoDoc analizadorJFlex;
     private String formatoArchivoSalida = "%-30s %-12s %-20s%n";
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     private int freq, tf;
     private String currentFile = "current_file.txt";
     private List<Lexema> terminos;
@@ -54,20 +56,8 @@ public class Analizador {
                 if((token.getToken()).equals("Termino")) { //Si es un término lo escribe en el archivo.
 
                     Lexema termino = new Lexema(token.getLexema());
-                    ListIterator<Lexema> iterator = terminos.listIterator();
-                    boolean encontrado = false;
-                    Lexema lexema;
 
-                    while (iterator.hasNext() && encontrado == false) {
-                        lexema = iterator.next();
-
-                        if(lexema.getTermino().equals(termino.getTermino())) {
-                            lexema.sumeFreq();
-                            encontrado = true;
-                        }
-                    }
-
-                    if(!encontrado) {
+                    if(!terminos.contains(termino)) {
                         terminos.add(termino);
                     }
                 }
@@ -82,22 +72,39 @@ public class Analizador {
 
     private void escribaTok(File file) {
         try {
-            writer = new BufferedWriter(new FileWriter(nuevoNombre(file) + ".txt")); //Escribe en archivo todos los términos para contar frecuencias después
+            writer = new BufferedWriter(new FileWriter(nuevoNombre(file) + ".tok")); //Escribe en archivo todos los términos para contar frecuencias después
+
+            int max = getTf();
 
             ListIterator<Lexema> iterator = terminos.listIterator();
             Lexema lexema;
 
             while (iterator.hasNext()) {
                 lexema = iterator.next();
-                System.out.println("Sume: " + lexema.getFreq());
-                writer.write(String.format(formatoArchivoSalida, lexema.getTermino(), lexema.getFreq(), lexema.getTf()));
-                writer.newLine();
+                writer.write(String.format(formatoArchivoSalida, lexema.getTermino(), lexema.getFreq(), df2.format(lexema.getTf(max))));
             }
 
             writer.close();
+            terminos.clear();
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    private int getTf() {
+        ListIterator<Lexema> iterator = terminos.listIterator();
+        Lexema lexema;
+        int max = 0;
+
+        while (iterator.hasNext()) {
+            lexema = iterator.next();
+
+            if(lexema.getFreq() > max) {
+                max = lexema.getFreq();
+            }
+        }
+
+        return max;
     }
 
 

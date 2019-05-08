@@ -4,7 +4,7 @@ public class Lexema {
 
     Lexema(String termino) {
         this.termino = termino;
-        this.frecuencia = 0;
+        this.frecuencia = 1;
     }
 
     public void sumeFreq(){
@@ -27,9 +27,10 @@ public class Lexema {
     public boolean equals(Object obj) {
         boolean equal = this.termino.equals(((Lexema) obj).termino);
 
-        if (equal) {
-            ((Lexema) obj).sumeFreq();
-        }
+            if (equal) {
+                ((Lexema) obj).sumeFreq();
+            }
+
 
         return equal;
     }

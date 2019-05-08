@@ -6,13 +6,13 @@
 
 * [X] Aceptar múltiples archivos.
 * [X] Salida de un archivo por cada archivo analizado con extensión .tok
-     * [ ] Término: 30
-     * [ ] Frecuencia: 12
-     * [ ] Frecuencia normalizada: 20
+     * [X] Término: 30
+     * [X] Frecuencia: 12
+     * [X] Frecuencia normalizada: 20
 * [ ] Salida de un solo archivo con todos los términos de los archivos anteriores llamado "Vocabulario"
-     * [ ] Término: 30
-     * [ ] Documentos donde aparece: 12
-     * [ ] Frecuencia inversa: 20
+     * [X] Término: 30
+     * [X] Documentos donde aparece: 12
+     * [X] Frecuencia inversa: 20
 
   ### Reglas 
   

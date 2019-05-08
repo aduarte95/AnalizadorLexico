@@ -14,13 +14,15 @@ public class Analizador {
     private AnalizadorLexicoDoc analizadorJFlex;
     private String formatoArchivoSalida = "%-30s %-12s %-20s%n";
     private static DecimalFormat df2 = new DecimalFormat("#.##");
-    private int freq, tf;
-    private String currentFile = "current_file.txt";
     private List<Lexema> terminos;
+    private List<Lexema> vocabulario;
+    private int totalDocumentos;
 
     Analizador(String directory) {
         this.directory = directory;
-        this.terminos = new LinkedList<Lexema>();
+        this.terminos = new LinkedList<>();
+        this.vocabulario = new LinkedList<>();
+        this.totalDocumentos = 0;
     }
 
     public void listeArchivos() {
@@ -28,12 +30,15 @@ public class Analizador {
             paths.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
                     try {
+                        ++totalDocumentos;
                         analizar(filePath.toFile());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
+
+            escribaVocabulario();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,6 +64,11 @@ public class Analizador {
 
                     if(!terminos.contains(termino)) {
                         terminos.add(termino);
+
+                        termino = new Lexema(token.getLexema());
+                        if(!vocabulario.contains(termino)) {
+                            vocabulario.add(termino);
+                        }
                     }
                 }
             }
@@ -91,6 +101,24 @@ public class Analizador {
         }
     }
 
+    private void escribaVocabulario() {
+        try {
+            BufferedWriter writerVocabulario = new BufferedWriter(new FileWriter("vocabulario.txt"));
+            ListIterator<Lexema> iterator = vocabulario.listIterator();
+            Lexema lexema;
+
+            while (iterator.hasNext()) {
+                lexema = iterator.next();
+                writerVocabulario.write(String.format(formatoArchivoSalida, lexema.getTermino(), lexema.getFreq(), df2.format(getIdf(lexema.getFreq()))));
+            }
+
+            writerVocabulario.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+
     private int getTf() {
         ListIterator<Lexema> iterator = terminos.listIterator();
         Lexema lexema;
@@ -107,6 +135,9 @@ public class Analizador {
         return max;
     }
 
+    private double getIdf(double aparicion) {
+        return Math.log10(totalDocumentos/aparicion);
+    }
 
     //Tomado de: http://www.technicalkeeda.com/java-tutorials/get-filename-without-extension-using-java
     private static String nuevoNombre(File file) {

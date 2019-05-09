@@ -44,6 +44,9 @@
  Letra = \p{L}
  TerminoConGuion = {Letra}*"_"{Letra}* | {Letra}*"-"{Letra}*
  Termino = {Letra} {Letra}*
+ Puntos = ("_"|"-"|"/"|"."|","|"~"|"¿"|"?"|"¡"|"!"|"@"|"#"|"$"|"%"|"^"|"&"|"*"|"|"|"("|")"|"="|"+"|"\\"|":"|";"|"<"|">"|"?"|"`"|"["|"]"|"\'"|"\"")
+ Puntuacion = {Puntos} {Puntos}*
+ TerminoConPuntuacion = {Termino}* {Puntuacion} {Termino}*
  Espacio = " "
  SaltoDeLinea = \n|\r|\r\n
  
@@ -106,6 +109,29 @@
 
 {Termino} {
  TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Termino");
+ this._existenTokens = true;
+ return t;
+}
+
+{Puntuacion} {
+TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Puntuacion");
+ this._existenTokens = true;
+ return t;
+}
+
+{TerminoConPuntuacion} {
+TokenPersonalizado t = new TokenPersonalizado(yytext().replace(".","").replace(",","").replace("/","")
+                                                .replace("#","").replace("¿","").replace("?","")
+                                                .replace("¡","").replace("!","").replace("$","")
+                                                .replace("%","").replace("^","").replace("&","")
+                                                .replace("@","").replace("*","").replace(";","")
+                                                .replace(":","").replace("<","").replace(">","")
+                                                .replace("{","").replace("}","").replace("[","")
+                                                .replace("]","").replace("-","").replace("=","")
+                                                .replace("_","").replace("`","").replace("‘","")
+                                                .replace("~","").replace("(","").replace(")","")
+                                                .replace("”","").replace("“","").replace("\"","")
+                                                .replace("…","").toLowerCase(), "TerminoConPuntuacion");
  this._existenTokens = true;
  return t;
 }

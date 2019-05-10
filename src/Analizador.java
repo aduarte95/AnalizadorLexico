@@ -45,7 +45,7 @@ public class Analizador {
                 {
                     //System.out.println(parts[0]);
                     //System.out.println(parts[0].substring(parts[0].length() - 5));
-                    parts[0] += ".html";
+                    parts[0] += ".htm";
                 }
                 listUrl[cnt] = parts[0];
                 System.out.println("De URLs: " + listUrl[cnt] + "\n");

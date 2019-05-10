@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -47,7 +48,8 @@ public class Analizador {
     public void analizar(File file) throws IOException{
         try {
             // Se trata de leer el archivo y analizarlo en la clase que se ha creado con JFlex
-            buffer = new BufferedReader(new FileReader(file));
+            Reader fstream = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8);
+            buffer = new BufferedReader(fstream);
             analizadorJFlex = new AnalizadorLexicoDoc(buffer);
 
             while(true){
@@ -82,7 +84,12 @@ public class Analizador {
 
     private void escribaTok(File file) {
         try {
-            writer = new BufferedWriter(new FileWriter(nuevoNombre(file) + ".tok")); //Escribe en archivo todos los términos para contar frecuencias después
+            try {
+                Writer fstream = new OutputStreamWriter(new FileOutputStream(nuevoNombre(file) + ".tok"), StandardCharsets.UTF_8);
+                writer = new BufferedWriter(fstream); //Escribe en archivo todos los términos para contar frecuencias después
+            } catch (Exception e) {
+
+            }
 
             int max = getTf();
 
@@ -103,7 +110,10 @@ public class Analizador {
 
     private void escribaVocabulario() {
         try {
-            BufferedWriter writerVocabulario = new BufferedWriter(new FileWriter("vocabulario.txt"));
+
+                Writer fstream = new OutputStreamWriter(new FileOutputStream("vocabulario.txt"), StandardCharsets.UTF_8);
+                BufferedWriter writerVocabulario = new BufferedWriter(fstream); //Escribe en archivo todos los términos para contar frecuencias después
+
             ListIterator<Lexema> iterator = vocabulario.listIterator();
             Lexema lexema;
 

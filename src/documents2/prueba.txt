@@ -10,8 +10,6 @@ es un vínculo a otro buen sitio web
 <H1>Recuperación de Información</H1>
 <H2>¿Qué es?</H2>
 Un ejemplo de una palabra con guión es: "dia-mes-año".
-Un ejemplo ? De # Palabra * Con ( Punto } Es : Sr.Datos 
-Amarillo.Patito
 <P> El proceso de recuperación se lleva a cabo mediante consultas a la base de datos donde se almacena la información estructurada, mediante un lenguaje de interrogación adecuado. Es necesario tener en cuenta los elementos clave que permiten hacer la búsqueda, determinando un mayor grado de pertinencia y precisión, como son: los índices, palabras clave, tesauros y los fenómenos que se pueden dar en el proceso como son el ruido y silencio documental. Uno de los problemas que surgen en la búsqueda de información es si lo que recuperamos es “mucho o poco” es decir, dependiendo del tipo de búsqueda se pueden recuperar multitud de documentos o simplemente un número muy reducido. A este fenómeno se denomina Silencio o Ruido documental.
 <P> <B><I>Silencio documental:</I> Son aquellos documentos almacenados en la base de datos pero que no han sido recuperados, debido a que la estrategia de búsqueda ha sido demasiado específica o que las palabras clave utilizadas no son las adecuadas para definir la búsqueda.</B>
 <BR> <B><I>Ruido documental: </I>Son aquellos documentos recuperados por el sistema pero que no son relevantes. Esto suele ocurrir cuando la estrategia de búsqueda se ha definido demasiado genérica.</B>

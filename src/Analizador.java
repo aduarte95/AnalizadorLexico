@@ -8,7 +8,6 @@ public class Analizador {
     private String directory;
     private BufferedWriter writer;
     private BufferedReader buffer;
-    private BufferedReader reader;
     private TokenPersonalizado token;
     private AnalizadorLexicoDoc analizadorJFlex;
     private String formatoArchivoSalida = "%-30s %-12s %-20s%n";
@@ -31,9 +30,10 @@ public class Analizador {
             //Lee URLs.txt (debe estar en el mismo directorio)
             //URL path = Analizador.class.getResource("URLs.txt");
             //File f = new File(path.getFile());
-            reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/" + directory));
+            Reader fstream = new InputStreamReader(new FileInputStream(new File(System.getProperty("user.dir") + "/URLs.txt")), StandardCharsets.UTF_8);
+            buffer = new BufferedReader(fstream);
             int cnt = 0;
-            String line = reader.readLine();
+            String line = buffer.readLine();
             while (line != null)
             {
 
@@ -50,7 +50,7 @@ public class Analizador {
                 listUrl[cnt] = parts[0];
                 System.out.println("De URLs: " + listUrl[cnt] + "\n");
                 //Lee la siguiente linea
-                line = reader.readLine();
+                line = buffer.readLine();
                 cnt++;
             }
         }catch (IOException e) {
@@ -58,27 +58,31 @@ public class Analizador {
         }
 
         //Se guardan los nombres de los archivos disponibles en Coleccion en listColeccion[]
-        File folder = new File(directory);
+        File folder = new File(System.getProperty("user.dir") + "/" + directory);
         File[] listOfFiles = folder.listFiles();
         for (int i = 0; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                listColeccion[i] = listOfFiles[i].getName();
-                System.out.println("De Coleccion: " + listOfFiles[i].getName() + "\n");
-            }
+
+                if (listOfFiles[i].isFile()) {
+                    listColeccion[i] = listOfFiles[i].getName();
+                    System.out.println("De Coleccion: " + listOfFiles[i].getName() + "\n");
+                }
+
         }
 
         //Se revisa si cada valor de listUrl[] esta en listColeccion[]
         //Si lo esta, se ejecuta el analisis de dicho archivo
-        for (int i = 0; i < listUrl.length-1; i++) {
-            if(Arrays.stream(listColeccion).anyMatch(listUrl[i]::equals))
-            {
-                try {
-                    ++totalDocumentos;
-                    //Directorio + El nombre del archivo
-                    //System.out.println("OJO: " +  directory + listUrl[i]);
-                    analizar(new File(directory + listUrl[i]));
-                } catch (Exception e) {
-                    e.printStackTrace();
+
+        for (int i = 0; i < listUrl.length; i++) {
+            if(listUrl[i]!= null) {
+                if (Arrays.stream(listColeccion).anyMatch(listUrl[i]::equals)) {
+                    try {
+                        ++totalDocumentos;
+                        //Directorio + El nombre del archivo
+                        //System.out.println("OJO: " +  directory + listUrl[i]);
+                        analizar(new File(directory + listUrl[i]));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -166,7 +170,7 @@ public class Analizador {
     private void escribaVocabulario() {
         try {
 
-                Writer fstream = new OutputStreamWriter(new FileOutputStream("vocabulario.txt"), StandardCharsets.UTF_8);
+                Writer fstream = new OutputStreamWriter(new FileOutputStream("Vocabulario.txt"), StandardCharsets.UTF_8);
                 BufferedWriter writerVocabulario = new BufferedWriter(fstream); //Escribe en archivo todos los términos para contar frecuencias después
 
             ListIterator<Lexema> iterator = vocabulario.listIterator();

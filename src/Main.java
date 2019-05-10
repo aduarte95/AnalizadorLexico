@@ -6,7 +6,7 @@ public class Main {
         if (args.length == 1) {
             directory = args[0];
         } else {
-            directory = "C:/Users/alexa/OneDrive/Recuperación de Información/Investigacion/AnalizadorLexico/src/documents2";
+            directory = "C:/Users/Sebastian/Desktop/AnalizadorLexico/src/Coleccion/";
         }
 
         analizador = new Analizador(directory);

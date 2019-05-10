@@ -1,4 +1,5 @@
 import java.io.*;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,6 +11,7 @@ public class Analizador {
     private String directory;
     private BufferedWriter writer;
     private BufferedReader buffer;
+    private BufferedReader reader;
     private TokenPersonalizado token;
     private AnalizadorLexicoDoc analizadorJFlex;
     private String formatoArchivoSalida = "%-30s %-12s %-20s%n";
@@ -17,6 +19,8 @@ public class Analizador {
     private List<Lexema> terminos;
     private List<Lexema> vocabulario;
     private int totalDocumentos;
+    private String listUrl[] = new String[751];
+    private String listColeccion[] = new String[751];
 
     Analizador(String directory) {
         this.directory = directory;
@@ -26,6 +30,64 @@ public class Analizador {
     }
 
     public void listeArchivos() {
+        try{
+            //Lee URLs.txt (debe estar en el mismo directorio)
+            URL path = Analizador.class.getResource("URLs.txt");
+            File f = new File(path.getFile());
+            reader = new BufferedReader(new FileReader(f));
+            int cnt = 0;
+            String line = reader.readLine();
+            while (line != null)
+            {
+
+                //Primero se divide la linea por el primer espacio que se encuentra en la linea
+                String[] parts = line.split(" ");
+                //Luego se asegura de que termine con .html (hay algunos que no)
+                //Se guardan en listURL[]
+                if(!parts[0].substring(parts[0].length() - 5).equals(".html"))
+                {
+                    //System.out.println(parts[0]);
+                    //System.out.println(parts[0].substring(parts[0].length() - 5));
+                    parts[0] += ".html";
+                }
+                listUrl[cnt] = parts[0];
+                System.out.println("De URLs: " + listUrl[cnt] + "\n");
+                //Lee la siguiente linea
+                line = reader.readLine();
+                cnt++;
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //Se guardan los nombres de los archivos disponibles en Coleccion en listColeccion[]
+        File folder = new File(directory);
+        File[] listOfFiles = folder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if (listOfFiles[i].isFile()) {
+                listColeccion[i] = listOfFiles[i].getName();
+                System.out.println("De Coleccion: " + listOfFiles[i].getName() + "\n");
+            }
+        }
+
+        //Se revisa si cada valor de listUrl[] esta en listColeccion[]
+        //Si lo esta, se ejecuta el analisis de dicho archivo
+        for (int i = 0; i < listUrl.length-1; i++) {
+            if(Arrays.stream(listColeccion).anyMatch(listUrl[i]::equals))
+            {
+                try {
+                    ++totalDocumentos;
+                    //Directorio + El nombre del archivo
+                    //System.out.println("OJO: " +  directory + listUrl[i]);
+                    analizar(new File(directory + listUrl[i]));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        escribaVocabulario();
+
+        /*
         try(Stream<Path> paths = Files.walk(Paths.get(directory))) {
             paths.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
@@ -42,6 +104,7 @@ public class Analizador {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
     public void analizar(File file) throws IOException{
@@ -82,7 +145,7 @@ public class Analizador {
 
     private void escribaTok(File file) {
         try {
-            writer = new BufferedWriter(new FileWriter(nuevoNombre(file) + ".tok")); //Escribe en archivo todos los términos para contar frecuencias después
+            writer = new BufferedWriter(new FileWriter("TokFiles/" + nuevoNombre(file) + ".tok")); //Escribe en archivo todos los términos para contar frecuencias después
 
             int max = getTf();
 

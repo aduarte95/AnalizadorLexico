@@ -6,7 +6,7 @@ public class Main {
         if (args.length == 1) {
             directory = args[0];
         } else {
-            directory = "C:/Users/Sebastian/Desktop/AnalizadorLexico/src/Coleccion/";
+            directory = "Coleccion/";
         }
 
         analizador = new Analizador(directory);

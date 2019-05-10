@@ -29,9 +29,9 @@ public class Analizador {
     public void listeArchivos() {
         try{
             //Lee URLs.txt (debe estar en el mismo directorio)
-            URL path = Analizador.class.getResource("URLs.txt");
-            File f = new File(path.getFile());
-            reader = new BufferedReader(new FileReader(f));
+            //URL path = Analizador.class.getResource("URLs.txt");
+            //File f = new File(path.getFile());
+            reader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/" + directory));
             int cnt = 0;
             String line = reader.readLine();
             while (line != null)

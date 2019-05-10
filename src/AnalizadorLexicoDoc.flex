@@ -44,9 +44,9 @@
  Letra = \p{L}
  TerminoConGuion = {Letra}*"_"{Letra}* | {Letra}*"-"{Letra}*
  Termino = {Letra} {Letra}*
- Puntos = ("_"|"-"|"/"|"."|","|"~"|"¿"|"?"|"¡"|"!"|"@"|"#"|"$"|"%"|"^"|"&"|"*"|"|"|"("|")"|"="|"+"|"\\"|":"|";"|"<"|">"|"?"|"`"|"["|"]"|"\'"|"\"")
+ Puntos = ("_"|"-"|"/"|"."|","|"~"|"¿"|"?"|"¡"|"!"|"@"|"#"|"$"|"%"|"^"|"&"|"*"|"|"|"("|")"|"="|"+"|"\\"|":"|";"|"?"|"`"|"["|"]"|"\'"|"\"")
  Puntuacion = {Puntos} {Puntos}*
- TerminoConPuntuacion = {Termino}* {Puntuacion} {Termino}*
+ TerminoConPuntuacion = {Termino}* {Puntuacion}+ {Termino}*
  Espacio = " "
  SaltoDeLinea = \n|\r|\r\n
  

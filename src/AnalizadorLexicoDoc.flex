@@ -33,20 +33,20 @@
  
 /* Inicio de Expresiones regulares */
 
+ Script = <script>([^<]*)|.*<\/script>
+ Style = <style>([^<]*)|.*<\/style>
  Etiqueta = <[^>]+>|<\/[a-zA-Z]*>
- Digito = [0-9]
- Numero = {Digito} {Digito}*
+ Numero = [0-2]?[0-9]?[0-9]?[0-9]|3000
  Articulo =  el | la | los | las | un | unos | una | unas | lo
  Contraccion = del | al
  Pronombre = ella | el | nosotros | nosotras | usted | ustedes
  Conjuncion = y | e | ni | mas | pero | aunque | sin embargo | sino | no obstante | empero | ya | sea | o | u | esto es | es decir | o sea | si | a condición de que | con tal de que | como | porque | pues | puesto que | dado que | pues que | ya que | tan | tal | luego | conque | así pues | aunque | a pesar de que | aun cuando | si bien | para que | a que | a fin de que | con objeto de | con la intención de que  
  Preposicion =  a | ante | bajo | con | de | desde | durante | en | entre | excepto | hacia | hasta | mediante | para | por | salvo | según | sin | sobre | tras
- Letra = \p{L}
- TerminoConGuion = {Letra}*"_"{Letra}* | {Letra}*"-"{Letra}*
- Termino = {Letra} {Letra}*
+ Letra = \p{Latin}
+ Termino = {Letra}{Letra}*
  Puntos = ("_"|"-"|"/"|"."|","|"~"|"¿"|"?"|"¡"|"!"|"@"|"#"|"$"|"%"|"^"|"&"|"*"|"|"|"("|")"|"="|"+"|"\\"|":"|";"|"?"|"`"|"["|"]"|"\'"|"\"")
  Puntuacion = {Puntos} {Puntos}*
- TerminoConPuntuacion = {Termino}* {Puntuacion}+ {Termino}*
+ TerminoConPuntuacion = {Termino}*{Puntuacion}+{Termino}*
  Espacio = " "
  SaltoDeLinea = \n|\r|\r\n
  
@@ -58,54 +58,38 @@
 /* Inicia sección de reglas */
  
 // Cada regla está formada por una {expresión} espacio {código}
-  
+
+{Script} {
+}
+
+{Style} {
+}
+
+
 {Etiqueta} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "Etiqueta");
- this._existenTokens = true;
- return t;
 }
 
 {Numero} {
- TokenPersonalizado t = new TokenPersonalizado(yytext(), "NUMERO");
+ TokenPersonalizado t = new TokenPersonalizado(yytext(), "Termino");
  this._existenTokens = true;
  return t;
 }
 
 {Articulo} {
- TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Articulo");
- this._existenTokens = true;
- return t;
 }
 
 {Contraccion} {
- TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Contraccion");
- this._existenTokens = true;
- return t;
 }
 
 {Pronombre} {
- TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Pronombre");
- this._existenTokens = true;
- return t;
 }
 
 {Conjuncion} {
- TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Conjuncion");
- this._existenTokens = true;
- return t;
 }
 
 {Preposicion} {
- TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Preposicion");
- this._existenTokens = true;
- return t;
 }
- 
-{TerminoConGuion} {
- TokenPersonalizado t = new TokenPersonalizado(yytext().replace("-","").replace("_","").toLowerCase(), "Termino");
- this._existenTokens = true;
- return t;
-}
+
 
 {Termino} {
  TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Termino");
@@ -114,9 +98,6 @@
 }
 
 {Puntuacion} {
-TokenPersonalizado t = new TokenPersonalizado(yytext().toLowerCase(), "Puntuacion");
- this._existenTokens = true;
- return t;
 }
 
 {TerminoConPuntuacion} {
@@ -131,7 +112,7 @@ TokenPersonalizado t = new TokenPersonalizado(yytext().replace(".","").replace("
                                                 .replace("_","").replace("`","").replace("‘","")
                                                 .replace("~","").replace("(","").replace(")","")
                                                 .replace("”","").replace("“","").replace("\"","")
-                                                .replace("…","").toLowerCase(), "TerminoConPuntuacion");
+                                                .replace("…","").toLowerCase(), "Termino");
  this._existenTokens = true;
  return t;
 }
@@ -143,6 +124,6 @@ TokenPersonalizado t = new TokenPersonalizado(yytext().replace(".","").replace("
 {SaltoDeLinea} {
 }
 
-[^] {TokenPersonalizado t = new TokenPersonalizado(yytext(), "Sin utilidad");
- this._existenTokens = true;
- return t;}
+[^] {
+    //Sin Utilidad
+}

@@ -31,16 +31,19 @@
  
 %eof}
  
-/* Inicio de Expresiones regulares */
+/* Inicio de Expresiones regulares <script.*>[^<]*((\w<\w)|<\w|^((?!<\/script>).)*$|[^<])*<\/script>
+ <script.*>(([^<])|(.<))*<\/script>
+ <script.*>(([^<])|(.<[^script]))*<\/script>*/
 
- Script = <script>([^<]*)|.*<\/script>
+ Script = <script.*>((<<)|([^<])|\/{ignore})*<\/script>
+ ignore = (.<[a-rt-z]?[a-bd-z]?[a-os-z]?[a-hj-z]?[a-oq-z]?[a-su-z]?([a-z])*)
  Style = <style>([^<]*)|.*<\/style>
- Etiqueta = <[^>]+>|<\/[a-zA-Z]*>
+ Etiqueta = <[^>]+>|<\/{ignore}*>
  Numero = [0-2]?[0-9]?[0-9]?[0-9]|3000
  Articulo =  el | la | los | las | un | unos | una | unas | lo
  Contraccion = del | al
  Pronombre = ella | el | nosotros | nosotras | usted | ustedes
- Conjuncion = y | e | ni | mas | pero | aunque | sin embargo | sino | no obstante | empero | ya | sea | o | u | esto es | es decir | o sea | si | a condición de que | con tal de que | como | porque | pues | puesto que | dado que | pues que | ya que | tan | tal | luego | conque | así pues | aunque | a pesar de que | aun cuando | si bien | para que | a que | a fin de que | con objeto de | con la intención de que  
+ Conjuncion = y | e | ni | mas | pero | aunque | sin embargo | sino | no obstante | empero | ya | sea | o | u | esto es | es decir | o sea | si | a condición de que | con tal de que | como | porque | pues | puesto que | dado que | pues que | ya que | tan | tal | luego | conque | así pues | aunque | a pesar de que | aun cuando | si bien | para que | a que | a fin de que | con objeto de | con la intención de que
  Preposicion =  a | ante | bajo | con | de | desde | durante | en | entre | excepto | hacia | hasta | mediante | para | por | salvo | según | sin | sobre | tras
  Letra = \p{Latin}
  Termino = {Letra}{Letra}*
@@ -60,6 +63,13 @@
 // Cada regla está formada por una {expresión} espacio {código}
 
 {Script} {
+    TokenPersonalizado t = new TokenPersonalizado(yytext()+"SCRIPT", "Termino");
+     this._existenTokens = true;
+     return t;
+}
+
+{ignore} {
+
 }
 
 {Style} {
@@ -120,7 +130,7 @@ TokenPersonalizado t = new TokenPersonalizado(yytext().replace(".","").replace("
 {Espacio} {
  // Ignorar cuando se ingrese un espacio
 }
- 
+
 {SaltoDeLinea} {
 }
 

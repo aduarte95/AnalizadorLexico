@@ -1,4 +1,4 @@
-public class Lexema {
+public class Lexema implements Comparable<Lexema> {
     private String termino;
     private int frecuencia;
 
@@ -36,4 +36,8 @@ public class Lexema {
     }
 
 
+    @Override
+    public int compareTo(Lexema o) {
+        return this.termino.compareTo(o.termino);
+    }
 }

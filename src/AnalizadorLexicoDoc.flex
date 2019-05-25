@@ -35,7 +35,7 @@
  <script.*>(([^<])|(.<))*<\/script>
  <script.*>(([^<])|(.<[^script]))*<\/script>*/
 
- Script = <script.*>((<<)|([^<])|\/{ignore})*<\/script>
+ Script = <script.*>((<<)|([^<])|(.<\/(([^s]|s[^c]|sc[^r]|scr[^i]|scri[^p]|scrip[^t])([a-z]|.)*)))*<\/script>
  ignore = (.<[a-rt-z]?[a-bd-z]?[a-os-z]?[a-hj-z]?[a-oq-z]?[a-su-z]?([a-z])*)
  Style = <style>([^<]*)|.*<\/style>
  Etiqueta = <[^>]+>|<\/{ignore}*>
@@ -63,9 +63,6 @@
 // Cada regla está formada por una {expresión} espacio {código}
 
 {Script} {
-    TokenPersonalizado t = new TokenPersonalizado(yytext()+"SCRIPT", "Termino");
-     this._existenTokens = true;
-     return t;
 }
 
 {ignore} {

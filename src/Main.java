@@ -6,7 +6,7 @@ public class Main {
         if (args.length == 1) {
             directory = args[0];
         } else {
-            directory = "Coleccion/";
+            directory = "documents2/";
         }
 
         analizador = new Analizador(directory);

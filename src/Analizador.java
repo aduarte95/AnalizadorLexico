@@ -153,6 +153,7 @@ public class Analizador {
             int max = getTf();
 
             ListIterator<Lexema> iterator = terminos.listIterator();
+            Collections.sort(terminos);
             Lexema lexema;
 
             while (iterator.hasNext()) {
@@ -174,6 +175,7 @@ public class Analizador {
                 BufferedWriter writerVocabulario = new BufferedWriter(fstream); //Escribe en archivo todos los términos para contar frecuencias después
 
             ListIterator<Lexema> iterator = vocabulario.listIterator();
+            Collections.sort(vocabulario);
             Lexema lexema;
 
             while (iterator.hasNext()) {

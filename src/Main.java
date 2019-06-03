@@ -10,7 +10,11 @@ public class Main {
         }
 
         analizador = new Analizador(directory);
-
         analizador.listeArchivos();
+
+        TokParser tokParser = new TokParser();
+        tokParser.crearWTD();
+        tokParser.crearPostings();
+        tokParser.crearIndice();
     }
 }

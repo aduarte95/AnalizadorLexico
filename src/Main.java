@@ -32,6 +32,13 @@ public class Main {
         {
             System.out.println(word);
         }
+        
+        /* POR CONSOLA 
+        String[] terminos = args[0].split(" ");
+        for (String word: terminos)
+        {
+            System.out.println(word);
+        }*/
 
         Buscador buscador = new Buscador(terminos);
         buscador.responderConsulta();

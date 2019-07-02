@@ -60,7 +60,7 @@ public class Buscador {
                             //Verifica que la pagina ya no se encuentre en el vector "paginas"
                             if(!paginas.contains(posting[1] + ".html"))
                             {
-                                //Se agrega en "pesos" el peso (ASÍ POR AHORA)
+                                //Se agrega en "pesos" el peso (ASI POR AHORA)
                                 pesos.add(i, pesoIndividual);
                                 //Se agrega en "paginas" el nombre de la pagina (se agrega el .html)
                                 paginas.add(i, posting[1] + ".html");
@@ -73,7 +73,7 @@ public class Buscador {
                             //Verifica que la pagina ya no se encuentre en el vector "paginas"
                             if(!paginas.contains(posting[1] + ".html"))
                             {
-                                //Se agrega en "pesos" el peso (ASÍ POR AHORA)
+                                //Se agrega en "pesos" el peso (ASI POR AHORA)
                                 pesos.add(i+1, pesoIndividual);
                                 //Se agrega en "paginas" el nombre de la pagina (se agrega el .html)
                                 paginas.add(i+1, posting[1] + ".html");
@@ -87,7 +87,7 @@ public class Buscador {
                         //Verifica que la pagina ya no se encuentre en el vector "paginas"
                         if(!paginas.contains(posting[1] + ".html"))
                         {
-                            //Se agrega en "pesos" el peso (ASÍ POR AHORA)
+                            //Se agrega en "pesos" el peso (ASI POR AHORA)
                             pesos.add(0, pesoIndividual);
                             //Se agrega en "paginas" el nombre de la pagina (se agrega el .html)
                             paginas.add(0, posting[1] + ".html");

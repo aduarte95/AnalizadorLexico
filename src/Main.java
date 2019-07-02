@@ -45,7 +45,7 @@ public class Main {
             FileWriter fw=new FileWriter(System.getProperty("user.dir") +"\\RespuestaConsulta.txt");
             for(int i=0; i<buscador.paginas.size(); i++)
             {
-                fw.write(buscador.paginas.get(i));
+                fw.write(buscador.getUrlPagina(buscador.paginas.get(i)));
                 fw.write("\r\n");
             }
             fw.close();

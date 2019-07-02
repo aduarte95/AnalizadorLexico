@@ -98,7 +98,26 @@ public class Buscador {
             }
         }
     }
+    
+    //Obtiene el url segpun pagina enviada
+    public String getUrlPagina(String nombrePagina) {
+        String pagina = nombrePagina;
+        String paginaCompleta = "";
 
+        try{
+            //Este path se puede cambiar por /URLs.txt si no se guardan adecuadamente los url en RespuestaConsulta
+            Scanner scan = new Scanner(new File(System.getProperty("user.dir") + "/src/URLs.txt"));
+            while(scan.hasNext()){
+                String line = scan.nextLine().toLowerCase().toString();
+                if(line.contains(pagina)){
+                    paginaCompleta = line;
+                }
+            }
+        } catch (Exception e) {}
+
+        return paginaCompleta;
+    }
+    
     //Termina con todas las paginas que hay que mostrar en orden en el vector "respuestaAConsulta"
     public void responderConsulta()
     {
